@@ -1,0 +1,37 @@
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  background-color: #4b4b4b;
+}
+
+.container {
+	display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.container h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex: 1;
+  margin: 0.5rem 1rem;
+  color: white;
+}
+
+.container p {
+  color: #3a3a3a;
+  font-size: 1rem;
+  flex: 1;
+  margin: 0.5rem 1rem;
+  color: white;
+}
+
+
+
+
+
