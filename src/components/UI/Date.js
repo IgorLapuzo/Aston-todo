@@ -8,8 +8,8 @@ function Date(props) {
 
 	return (
 		<div className={classes.date}>
-			<div className={classes.month}>{month}</div>
 			<div className={classes.year}>{year}</div>
+			<div className={classes.month}>{month}</div>
 			<div className={classes.day}>{day}</div>
 			<div className={classes.time}>{time}</div>
 		</div>
