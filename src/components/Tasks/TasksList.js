@@ -1,25 +1,24 @@
 import TaskItem from './TaskItem';
-import Card from '../UI/Card';
 import classes from './TasksList.module.css'
+import { Fragment } from 'react';
 
 const TasksList = (props) => {
-	if (props.tasks.length === 0) {
+	if (props.items.length === 0) {
     return <h2 className={classes.fallback}>Нет задач</h2>;
   }
 	
 	return (
-		<Card className={classes.tasks}>
-			{props.tasks.map(task => (
+		<Fragment>
+			{props.items.map(task => (
 				<TaskItem 
 				key={task.id}
-        createdDate={task.createdDate}
-        title={task.taskTitle}
-        description={task.taskDescription}
-        expiredDate={task.expiredDate}
+        title={task.title}
+        description={task.description}
+        date={task.date}
       	/>
 			))}
-		</Card>
-	)
-}
+		</Fragment>
+	);
+};
 
 export default TasksList;

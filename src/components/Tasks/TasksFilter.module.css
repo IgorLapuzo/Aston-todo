@@ -6,8 +6,9 @@
 .control {
   display: flex;
   width: 100%;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 1rem 0;
 }
 
@@ -18,7 +19,9 @@
 
 .control select {
   font: inherit;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 0.5rem;
   font-weight: bold;
   border-radius: 6px;
+  background-color: #4b4b4b;
+  color: white;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TaskForm from './TaskForm';
 import classes from './NewTask.module.css';
+import Button from '../UI/Button';
 
 
 const NewTask = (props) => {
@@ -26,14 +27,14 @@ const NewTask = (props) => {
 	return (
 		<div className={classes['new-task']}>
 			{!isEditing && (
-        <button onClick={startEditingHandler}>Добавить новую задачу</button>
+        <Button onClick={startEditingHandler}>Добавить новую задачу</Button>
       )}
 			{isEditing && (
         <TaskForm
           onSaveTaskData={saveTaskDataHandler}
           onCancel={stopEditingHandler}
         />
-      )}
+      )} 
 		</div>
 	);
 };

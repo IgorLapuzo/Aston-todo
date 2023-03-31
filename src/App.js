@@ -3,11 +3,37 @@ import Header from './components/Layout/Header';
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
 
+
+
 const DUMMY_TASKS = [
-  {id: 1, taskTitle: 'Title1', taskDescription: 'Description1', expiredDate: new Date(2021, 2, 30, 3, 0), status: 'active'},
-  {id: 2, taskTitle: 'Title2', taskDescription: 'Description2', expiredDate: new Date(2021, 2, 30, 4, 0), status: 'finished'},
-  {id: 3, taskTitle: 'Title3', taskDescription: 'Description3', expiredDate: new Date(2021, 2, 30, 5, 0), status: 'unfinished'},
-  {id: 4, taskTitle: 'Title4', taskDescription: 'Description4', expiredDate: new Date(2021, 2, 30, 6, 0), status: 'archives'},  
+  {
+    id: 1,
+    title: 'Title1',
+    description: 'Description1',
+    date: new Date(2021, 2, 30, 3, 0),
+    status: 'active'
+  },
+  {
+    id: 2,
+    title: 'Title2',
+    description: 'Description2',
+    date: new Date(2021, 2, 30, 4, 0),
+    status: 'finished'
+  },
+  {
+    id: 3,
+    title: 'Title3',
+    description: 'Description3',
+    date: new Date(2021, 2, 30, 5, 0),
+    status: 'unfinished'
+  },
+  {
+    id: 4,
+    title: 'Title4',
+    description: 'Description4',
+    date: new Date(2021, 2, 30, 6, 0),
+    status: 'archives'
+  },  
 ]
 
 function App() {
@@ -23,7 +49,7 @@ function App() {
     <Fragment>
       <Header />
       <NewTask onAddTask={addTaskHandler}/>
-      <Tasks tasks = {tasks}/>
+      <Tasks items = {tasks}/>
     </Fragment>
   );
 }

@@ -8,7 +8,7 @@ const TasksFilter = (props) => {
   return (
     <div className={classes.filter}>
       <div className={classes.control}>
-        <label>Фильтр</label>
+        <label>Фильтровать</label>
         <select value={props.selected} onChange={dropdownChangeHandler}>
           <option value='all'>Все</option>
           <option value='active'>Активные</option>

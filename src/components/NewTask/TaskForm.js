@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import classes from './TaskForm.module.css';
+import Button from '../UI/Button';
 
 const TaskForm = (props) => {
 	const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEnteredDescription] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
+	const [enteredTime, setEnteredTime] = useState('');
 
 	const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -15,7 +17,11 @@ const TaskForm = (props) => {
   };
 
 	const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);
+    setEnteredDate(event.target.value);	
+  };
+	
+	const timeChangeHandler = (event) => {
+    setEnteredTime(event.target.value);	
   };
 
 	const submitHandler = (event) => {
@@ -23,19 +29,21 @@ const TaskForm = (props) => {
 		const taskData = {
       title: enteredTitle,
       description: enteredDescription,
-      date: new Date(enteredDate),
+      date: new Date(`${enteredDate} ${enteredTime}`),
     };
+		
 		props.onSaveTaskData(taskData);
     setEnteredTitle('');
     setEnteredDescription('');
     setEnteredDate('');
+		setEnteredTime('');
   };	
 
 	return (
 		<form onSubmit={submitHandler}>
 			<div className={classes.controls}>
 				<div className={classes.control}>
-					<label>Title</label>
+					<label>Заголовок</label>
 					<input 
 						type='text'
 						value={enteredTitle}
@@ -43,7 +51,7 @@ const TaskForm = (props) => {
 					/>
 				</div>
 				<div className={classes.control}>
-					<label>Description</label>
+					<label>Описание</label>
 					<input 
 						type='text'
 						value={enteredDescription}
@@ -51,7 +59,7 @@ const TaskForm = (props) => {
 					/>
 				</div>
 				<div className={classes.control}>
-					<label>Date</label>
+					<label>Дата</label>
 					<input 
 						type='date' 
 						min='2019-01-01' 
@@ -60,13 +68,21 @@ const TaskForm = (props) => {
             onChange={dateChangeHandler}
 					/>
 				</div>
+				<div className={classes.control}>
+					<label>Время</label>
+					<input 
+						type='time' 
+						value={enteredTime}
+            onChange={timeChangeHandler}
+					/>
+				</div>
 			</div>
 			<div className={classes.actions}>
-				<button type='button' onClick={props.onCancel}>Отмена</button>
-				<button type='submit'>Добавить задачу</button>
+				<Button type='button' onClick={props.onCancel}>Отмена</Button>
+				<Button type='submit' onSubmit={props.onSaveTaskData}>Добавить задачу</Button>
 			</div>
 		</form>
-	)
-}
+	);
+};
 
 export default TaskForm;
