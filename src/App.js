@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, Component } from 'react';
 import Header from './components/Layout/Header';
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
@@ -36,22 +36,27 @@ const DUMMY_TASKS = [
   },  
 ]
 
-function App() {
-  const [tasks, setTasks] = useState(DUMMY_TASKS);
+class App extends Component {
+  constructor() {
+    super();
+    this.state={
+      tasks: DUMMY_TASKS
+    }
+  }
 
-  const addTaskHandler = (task) => {
-    setTasks((prevTasks) => {
-      return [task, ...prevTasks];
-    });
+  addTaskHandler = (task) => {
+    this.setState({tasks: [...this.state.tasks, task]})
   };
-
-  return (
-    <Fragment>
-      <Header />
-      <NewTask onAddTask={addTaskHandler}/>
-      <Tasks items = {tasks}/>
-    </Fragment>
-  );
+ 
+  render() {
+    return (
+      <Fragment>
+        <Header />
+        <NewTask onAddTask={this.addTaskHandler.bind(this)}/>
+        <Tasks items={this.state.tasks}/>
+      </Fragment>
+    );
+  }
 }
 
 export default App;

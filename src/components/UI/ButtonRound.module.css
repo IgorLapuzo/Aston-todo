@@ -1,5 +1,6 @@
 .button {
   background-color: #4b4b4b;
+  color: white;
   padding: 0.75rem 0rem;
   cursor: pointer;
 	border-radius: 50%;
@@ -9,15 +10,4 @@
 .button:hover,
 .button:active {
   background: #757575;
-}
-
-.wrapper {
-  border-radius: 50%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.wrapper img {
-  width: 50%;
-  height: 50%;
 }

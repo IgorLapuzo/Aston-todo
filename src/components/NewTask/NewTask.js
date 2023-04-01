@@ -1,42 +1,49 @@
-import { useState } from 'react';
+import { Component } from 'react';
 import TaskForm from './TaskForm';
 import classes from './NewTask.module.css';
 import Button from '../UI/Button';
 
 
-const NewTask = (props) => {
-	const [isEditing, setIsEditing] = useState(false);
-
-	const saveTaskDataHandler = (enteredTaskData) => {
+class NewTask extends Component {
+  constructor() {
+    super();
+    this.state={
+      isEditing: false,
+    }
+  }
+	
+	saveTaskDataHandler = (enteredTaskData) => {
     const taskData = {
       ...enteredTaskData,
       id: Math.random().toString(),
     };
-    props.onAddTask(taskData);
-    setIsEditing(false);
-  };
+    this.props.onAddTask(taskData);
+    this.setState({isEditing: false}) 
+  }
 
-	const startEditingHandler = () => {
-    setIsEditing(true);
-  };
+	startEditingHandler = () => {
+    this.setState({isEditing: true})
+  }
 
-  const stopEditingHandler = () => {
-    setIsEditing(false);
-  };
+  stopEditingHandler = () => {
+    this.setState({isEditing: false})
+  }
 
-	return (
-		<div className={classes['new-task']}>
-			{!isEditing && (
-        <Button onClick={startEditingHandler}>Добавить новую задачу</Button>
-      )}
-			{isEditing && (
-        <TaskForm
-          onSaveTaskData={saveTaskDataHandler}
-          onCancel={stopEditingHandler}
-        />
-      )} 
-		</div>
-	);
-};
+  render() {
+    return (
+      <div className={classes['new-task']}>
+        {!this.state.isEditing && (
+          <Button onClick={this.startEditingHandler.bind(this)}>Добавить новую задачу</Button>
+        )}
+        {this.state.isEditing && (
+          <TaskForm
+            onSaveTaskData={this.saveTaskDataHandler.bind(this)}
+            onCancel={this.stopEditingHandler.bind(this)}
+          />
+        )} 
+      </div>
+    )
+  }
+}
 
 export default NewTask;

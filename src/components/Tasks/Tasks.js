@@ -1,31 +1,36 @@
-import { useState } from 'react';
+import { Component } from 'react';
 import TasksFilter from './TasksFilter';
 import TasksList from './TasksList';
 import classes from './Tasks.module.css';
 
-const Tasks = (props) => {
-  const [filteredGroup, setFilteredGroup] = useState('all');
+class Tasks extends Component {
+  constructor() {
+    super();
+    this.state={
+      filteredGroup: 'active',
+    }
+  }
 
-  const filterChangeHandler = (selectedGroup) => {
-    setFilteredGroup(selectedGroup);
+  filterChangeHandler = (selectedGroup) => {
+    this.setState({filteredGroup: selectedGroup});
   };
 
-  const filteredTasks = props.items.filter((task) => {
-    if (filteredGroup === 'all') {
-      return true
-    };
-    return task.status === filteredGroup;
-  });
-
-  return (
+  render() {
+    return (
       <div className={classes.tasks}>
         <TasksFilter
-          selected={filteredGroup}
-          onChangeFilter={filterChangeHandler}
+          selected={this.state.filteredGroup}
+          onChangeFilter={this.filterChangeHandler.bind(this)}
         />
-        <TasksList items={filteredTasks} />
+        <TasksList items={this.props.items.filter((task) => {
+          if (this.state.filteredGroup === 'all') {
+            return true
+          };
+          return task.status === this.state.filteredGroup;
+        })} />
       </div>
-  );
+    )
+  }
 };
 
 export default Tasks;

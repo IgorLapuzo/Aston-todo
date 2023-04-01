@@ -1,15 +1,24 @@
 import { Fragment } from 'react';
-import ChangeThemeButton from './ChangeThemeButton.js';
+import ButtonRound from '../UI/ButtonRound';
+import Button from '../UI/Button';
+import light from '../../assets/light.png';
+import tableLight from '../../assets/tableLight.png';
 import classes from './Header.module.css';
 
 const Header = props => {
 	return <Fragment>
 		<header className={classes.header}>
-			<div className={classes.indicator}>
-				<span className={classes.text}>Задач на сегодня: 3</span>
-				<span className={classes.text}>Задач на неделю: 10</span>
-			</div>
-			<ChangeThemeButton />
+			<Button>Задач на сегодня: 3</Button>
+			<ButtonRound className={classes.button}>
+				<div className={classes.wrapper}>
+					<img src={tableLight} alt='change to table view'/>
+				</div>
+			</ButtonRound>
+			<ButtonRound className={classes.button}>
+				<div className={classes.wrapper}>
+					<img src={light} alt='change to light theme'/>
+				</div>
+			</ButtonRound>
 		</header>
 		<h1 className={classes.name}>Just do it</h1>
 	</Fragment>

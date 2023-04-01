@@ -1,88 +1,110 @@
-import { useState } from 'react';
-import classes from './TaskForm.module.css';
+import { Component, createRef, Fragment } from 'react';
+import ErrorModal from '../UI/ErrorModal';
 import Button from '../UI/Button';
+import classes from './TaskForm.module.css';
 
-const TaskForm = (props) => {
-	const [enteredTitle, setEnteredTitle] = useState('');
-  const [enteredDescription, setEnteredDescription] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
-	const [enteredTime, setEnteredTime] = useState('');
 
-	const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-  };
-
-	const descriptionChangeHandler = (event) => {
-    setEnteredDescription(event.target.value);
-  };
-
-	const dateChangeHandler = (event) => {
-    setEnteredDate(event.target.value);	
-  };
+class TaskForm extends Component {
+	constructor(props) {
+		super(props) 
+		this.titleInputRef = createRef();
+		this.descriptionInputRef = createRef();
+		this.dateInputRef = createRef();
+		this.timeInputRef = createRef();
+		this.state={
+      errorTitle: '',
+      errorMessage: '',
+    }
+		
+	}
 	
-	const timeChangeHandler = (event) => {
-    setEnteredTime(event.target.value);	
-  };
-
-	const submitHandler = (event) => {
+	submitHandler = (event) => {
     event.preventDefault();
+		const enteredTitle = this.titleInputRef.current.value
+		const enteredDescription = this.descriptionInputRef.current.value
+		const enteredDate = this.dateInputRef.current.value
+		const enteredTime = this.timeInputRef.current.value
+
+		if (enteredTitle.trim().length < 2) {
+			this.setState({
+				errorTitle: 'Ошибка ввода',
+				errorMessage: 'Длина заголовка не может быть меньше 2 символов'
+			})
+			return;
+		}
+
 		const taskData = {
       title: enteredTitle,
       description: enteredDescription,
       date: new Date(`${enteredDate} ${enteredTime}`),
+			status: 'active',
     };
 		
-		props.onSaveTaskData(taskData);
-    setEnteredTitle('');
-    setEnteredDescription('');
-    setEnteredDate('');
-		setEnteredTime('');
+		this.props.onSaveTaskData(taskData);
+		this.titleInputRef.current.value = ''
+		this.descriptionInputRef.current.value = ''
+		this.dateInputRef.current.value = ''
+		this.timeInputRef.current.value = ''
   };	
 
-	return (
-		<form onSubmit={submitHandler}>
-			<div className={classes.controls}>
-				<div className={classes.control}>
-					<label>Заголовок</label>
-					<input 
-						type='text'
-						value={enteredTitle}
-						onChange={titleChangeHandler}
+	errorHandler = () => {
+		this.setState({
+			errorTitle: '',
+			errorMessage: '',
+		})
+	}
+
+	render() {
+		return (
+			<Fragment>
+				{this.state.errorMessage && (
+					<ErrorModal 
+						errorTitle = {this.state.errorTitle} 
+						errorMessage = {this.state.errorMessage}
+						onConfirm={this.errorHandler.bind(this)}
 					/>
-				</div>
-				<div className={classes.control}>
-					<label>Описание</label>
-					<input 
-						type='text'
-						value={enteredDescription}
-            onChange={descriptionChangeHandler}
-					/>
-				</div>
-				<div className={classes.control}>
-					<label>Дата</label>
-					<input 
-						type='date' 
-						min='2019-01-01' 
-						max='2025-12-31'
-						value={enteredDate}
-            onChange={dateChangeHandler}
-					/>
-				</div>
-				<div className={classes.control}>
-					<label>Время</label>
-					<input 
-						type='time' 
-						value={enteredTime}
-            onChange={timeChangeHandler}
-					/>
-				</div>
-			</div>
-			<div className={classes.actions}>
-				<Button type='button' onClick={props.onCancel}>Отмена</Button>
-				<Button type='submit' onSubmit={props.onSaveTaskData}>Добавить задачу</Button>
-			</div>
-		</form>
-	);
+				)}
+				<form onSubmit={this.submitHandler.bind(this)}>
+					<div className={classes.controls}>
+						<div className={classes.control}>
+							<label>Заголовок*</label>
+							<input 
+								type='text'
+								ref= {this.titleInputRef}
+							/>
+						</div>
+						<div className={classes.control}>
+							<label>Описание</label>
+							<input 
+								type='text'
+								ref= {this.descriptionInputRef}
+							/>
+						</div>
+						<div className={classes.control}>
+							<label>Дата</label>
+							<input 
+								type='date' 
+								min='2019-01-01' 
+								max='2025-12-31'
+								ref= {this.dateInputRef}
+							/>
+						</div>
+						<div className={classes.control}>
+							<label>Время</label>
+							<input 
+								type='time' 
+								ref= {this.timeInputRef}
+							/>
+						</div>
+					</div>
+					<div className={classes.actions}>
+						<Button type='button' onClick={this.props.onCancel}>Отмена</Button>
+						<Button type='submit' onSubmit={this.props.onSaveTaskData}>Добавить задачу</Button>
+					</div>
+				</form>
+			</Fragment>
+		);
+	}
 };
 
 export default TaskForm;
