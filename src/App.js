@@ -1,9 +1,8 @@
-import { Fragment, Component } from 'react';
+import { Component } from 'react';
 import Header from './components/Layout/Header';
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
-
-
+import { ThemeContext } from './context/ThemeContext'
 
 const DUMMY_TASKS = [
   {
@@ -40,21 +39,33 @@ class App extends Component {
   constructor() {
     super();
     this.state={
-      tasks: DUMMY_TASKS
+      tasks: DUMMY_TASKS,
+      theme: 'light',
     }
+  }
+
+  changeThemeHandler = () => {
+    this.setState(({theme}) => 
+      ({theme: theme === 'light' ? 'dark' : 'light'})
+    )
   }
 
   addTaskHandler = (task) => {
     this.setState({tasks: [...this.state.tasks, task]})
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps === this.props && prevState === this.state) return;
+    document.body.dataset.theme = this.state.theme;
+  }
  
   render() {
     return (
-      <Fragment>
+      <ThemeContext.Provider value={{value: this.state.theme, changeThemeHandler: this.changeThemeHandler}}>
         <Header />
         <NewTask onAddTask={this.addTaskHandler.bind(this)}/>
         <Tasks items={this.state.tasks}/>
-      </Fragment>
+      </ThemeContext.Provider>
     );
   }
 }
