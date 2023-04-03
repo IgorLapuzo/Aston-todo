@@ -1,0 +1,30 @@
+* {
+	box-sizing: border-box;
+	border: none;
+}
+
+body[data-theme='light'] {
+	background-image: linear-gradient(100deg, #b8b6b6, #d4f1ff);
+	color: #1a150e;
+	--main-bg-color: #fff;
+	--input-bg-color: #d9d9d9;
+	--date-bg: #c2c2c2;
+	--date-border: #000;
+	--button-hover: #b8b6b6;
+}
+
+body[data-theme='dark'] {
+	background-image: linear-gradient(100deg, #575656, #062e3f);
+	color: #fff;
+	--main-bg-color: rgb(31, 31, 31);
+	--input-bg-color: #4b4b4b;
+	--date-bg: #2a2a2a;
+	--date-border: #ececec;
+	--button-hover: #757575;
+}
+
+body {
+	margin: 0;
+	font-family: 'Work Sans', sans-serif;
+	transition: 0.5s linear;
+}

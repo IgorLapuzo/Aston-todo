@@ -1,8 +1,7 @@
 import { Fragment, Component } from 'react';
 import ButtonRound from '../UI/ButtonRound';
-import Button from '../UI/Button';
 import light from '../../assets/light.png';
-import tableLight from '../../assets/tableLight.png';
+import dark from '../../assets/dark.png';
 import classes from './Header.module.css';
 import { ThemeContext } from '../../context/ThemeContext';
 
@@ -11,10 +10,7 @@ class Header extends Component {
 
 	static contextType = ThemeContext;
 
-	
-
 	onClickHandler = () => {
-		
 		this.context.changeThemeHandler();
 	}
 
@@ -22,19 +18,15 @@ class Header extends Component {
 		return (
 			<Fragment>
 				<header className={classes.header}>
-					<Button>Задач на сегодня: 3</Button>
-					<ButtonRound className={classes.button}>
-						<div className={classes.wrapper}>
-							<img src={tableLight} alt='change to table view'/>
-						</div>
-					</ButtonRound>
+					<input 
+						type='text'		
+						/>
 					<ButtonRound className={classes.button} onClick={this.onClickHandler}>
 						<div className={classes.wrapper}>
-							<img src={light} alt='change to light theme'/>
+							<img src={this.context.value === 'light' ? dark : light} alt='change to light theme'/>
 						</div>
 					</ButtonRound>
 				</header>
-				<h3>{this.context.value}</h3>
 				<h1 className={classes.name}>Just do it</h1>
 			</Fragment>
 		)

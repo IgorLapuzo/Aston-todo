@@ -3,10 +3,11 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  padding: 0.5rem;
-  margin: 1rem 0;
+  padding: 0.3rem;
+  margin: 0.8rem 0;
   border-radius: 12px;
-  background-color: #4b4b4b;
+  background-color: var(--input-bg-color);
+  cursor: pointer;
 }
 
 .container {
@@ -16,19 +17,19 @@
 }
 
 .container h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   flex: 1;
   margin: 0.25rem 1rem;
-  color: white;
+  color: inherit;
 }
 
 .container p {
   color: #3a3a3a;
-  font-size: 1rem;
+  font-size: 0.8rem;
   flex: 1;
   margin: 0.25rem 1rem;
-  color: white;
+  color: inherit;
 }
 
 

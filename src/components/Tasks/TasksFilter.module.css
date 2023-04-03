@@ -1,5 +1,5 @@
 .filter {
-  color: white;
+  color: inherit;
   padding: 0 1rem;
 }
 
@@ -14,14 +14,13 @@
 
 .control label {
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 .control select {
   font: inherit;
+  font-size: 0.8rem;
   padding: 0.5rem 0.5rem;
-  font-weight: bold;
   border-radius: 6px;
-  background-color: #4b4b4b;
-  color: white;
+  background-color: var(--input-bg-color);
+  color: inherit;
 }
