@@ -18,9 +18,12 @@ class Header extends Component {
 		return (
 			<Fragment>
 				<header className={classes.header}>
-					<input 
-						type='text'		
-						/>
+						<div className={classes.control}>
+							<input 
+								placeholder='Поиск...'
+								type='text'
+							/>
+						</div>
 					<ButtonRound className={classes.button} onClick={this.onClickHandler}>
 						<div className={classes.wrapper}>
 							<img src={this.context.value === 'light' ? dark : light} alt='change to light theme'/>

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Header from './components/Layout/Header';
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
+import ModalView from './components/UI/ModalView';
 import { ThemeContext } from './context/ThemeContext'
 
 const DUMMY_TASKS = [
@@ -41,6 +42,11 @@ class App extends Component {
     this.state={
       tasks: DUMMY_TASKS,
       theme: 'light',
+      active: '',
+      activeTitle: '',
+      activeDescription: '',
+      activeDate: '',
+      activeStatus: '',
     }
   }
 
@@ -58,13 +64,36 @@ class App extends Component {
     if (prevProps === this.props && prevState === this.state) return;
     document.body.dataset.theme = this.state.theme;
   }
+
+  activeChangeHandler = (id) => {
+    this.setState({active: id});
+    for (let task of this.state.tasks) {
+      if (id === task.id) {
+        this.setState({
+          activeTitle: task.title,
+          activeDescription: task.description,
+          activeDate: task.date,
+          activeStatus: task.status,
+        });
+      }
+    }
+  };
  
   render() {
     return (
       <ThemeContext.Provider value={{value: this.state.theme, changeThemeHandler: this.changeThemeHandler}}>
+        {this.state.active && (<ModalView 
+          title={this.state.activeTitle}
+          description={this.state.activeDescription}
+          status={this.state.activeStatus}
+          date={this.state.activeDate}
+        />)}
         <Header />
         <NewTask onAddTask={this.addTaskHandler.bind(this)}/>
-        <Tasks items={this.state.tasks}/>
+        <Tasks 
+          items={this.state.tasks}
+          onActiveChangeHandler={this.activeChangeHandler}
+        />
       </ThemeContext.Provider>
     );
   }

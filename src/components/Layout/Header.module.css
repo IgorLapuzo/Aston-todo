@@ -1,5 +1,4 @@
 .header {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -15,7 +14,7 @@
 
  .name{
   text-align: center;
-  margin-top: 6rem;
+  margin-top: 1rem;
   font-size: 4rem;
  }
 
@@ -29,3 +28,14 @@
   height: 35%;
 }
 
+.control input {
+  font: inherit;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 10rem;
+  max-width: 100%;
+  background-color: var(--input-bg-color);
+}

@@ -1,6 +1,7 @@
 import classes from './TasksFilter.module.css';
 
 const TasksFilter = (props) => {
+  
   const dropdownChangeHandler = (event) => {
     props.onChangeFilter(event.target.value);
   };
