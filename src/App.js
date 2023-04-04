@@ -25,7 +25,7 @@ const DUMMY_TASKS = [
     title: 'Title3',
     description: 'Description3',
     date: new Date(2021, 2, 30, 5, 0),
-    status: 'unfinished'
+    status: 'active'
   },
   {
     id: 4,
@@ -42,11 +42,14 @@ class App extends Component {
     this.state={
       tasks: DUMMY_TASKS,
       theme: 'light',
-      active: '',
+      activeId: '',
       activeTitle: '',
       activeDescription: '',
       activeDate: '',
       activeStatus: '',
+      editTitleMode: false,
+      editDescriptionMode: false,
+      editDateMode: false,
     }
   }
 
@@ -65,11 +68,11 @@ class App extends Component {
     document.body.dataset.theme = this.state.theme;
   }
 
-  activeChangeHandler = (id) => {
-    this.setState({active: id});
+  activeIdChangeHandler = (id) => {
     for (let task of this.state.tasks) {
       if (id === task.id) {
         this.setState({
+          activeId: id,
           activeTitle: task.title,
           activeDescription: task.description,
           activeDate: task.date,
@@ -78,21 +81,113 @@ class App extends Component {
       }
     }
   };
- 
+
+  closeActiveTask = () => {
+    this.setState({
+      tasks: [...this.state.tasks.filter(task => task.id !== this.state.activeId), {
+        id: this.state.activeId,
+        title: this.state.activeTitle,
+        description: this.state.activeDescription,
+        date: this.state.activeDate,
+        status: this.state.activeStatus}],
+      activeId: '',
+      activeTitle: '',
+      activeDescription: '',
+      activeDate: '',
+      activeStatus: '',
+		})
+  }
+
+
+  deleteActiveTask = () => {
+    this.setState({
+      tasks: [...this.state.tasks.filter(task => task.id !== this.state.activeId)],
+      activeId: '',
+    }) 
+  }
+
+  archivesActiveTask = () => {
+    for (let i=0; i<this.state.tasks.length; i++) {
+      if (this.state.activeId === this.state.tasks[i].id && this.state.activeStatus !== 'archives') {
+        this.setState({activeStatus: 'archives'})
+        break;
+      }
+      if (this.state.activeId === this.state.tasks[i].id && this.state.activeStatus === 'archives') {
+        this.setState({activeStatus: 'active'})
+        break;
+      }
+    }
+  }
+  
+  finishActiveTask = () => {
+    for (let i=0; i<this.state.tasks.length; i++) {
+      if (this.state.activeId === this.state.tasks[i].id && this.state.activeStatus === 'active') {
+        this.setState({activeStatus: 'finished'})
+        break;
+      }
+      if (this.state.activeId === this.state.tasks[i].id && this.state.activeStatus === 'finished') {
+        this.setState({activeStatus: 'active'})
+        break;
+      }
+    }
+  }
+
+  activateTitleEditMode = () => {
+    this.setState({
+			editTitleMode: true,
+		})
+  }
+
+  activateDescriptionEditMode = () => {
+    this.setState({
+			editDescriptionMode: true,
+		})
+  }
+
+  onTitleChange = (e) => {
+		this.setState({
+			activeTitle: e.currentTarget.value,
+		});
+	}
+
+  onDescriptionChange = (e) => {
+		this.setState({
+      activeDescription: e.currentTarget.value,
+		});
+	}
+
+  deactivateEditMode = () => {
+		this.setState({
+      editTitleMode: false,
+			editDescriptionMode: false,
+		})
+	}
+
   render() {
     return (
       <ThemeContext.Provider value={{value: this.state.theme, changeThemeHandler: this.changeThemeHandler}}>
-        {this.state.active && (<ModalView 
+        {this.state.activeId && (<ModalView 
           title={this.state.activeTitle}
           description={this.state.activeDescription}
           status={this.state.activeStatus}
           date={this.state.activeDate}
+          closeActiveTask={this.closeActiveTask}
+          archivesActiveTask={this.archivesActiveTask}
+          finishActiveTask={this.finishActiveTask}
+          editTitleMode={this.state.editTitleMode}
+          editDescriptionMode={this.state.editDescriptionMode}
+          activateTitleEditMode={this.activateTitleEditMode}
+          activateDescriptionEditMode={this.activateDescriptionEditMode}
+          deactivateEditMode={this.deactivateEditMode}
+          onTitleChange={this.onTitleChange}
+          onDescriptionChange={this.onDescriptionChange}
+          deleteActiveTask={this.deleteActiveTask}
         />)}
         <Header />
         <NewTask onAddTask={this.addTaskHandler.bind(this)}/>
         <Tasks 
           items={this.state.tasks}
-          onActiveChangeHandler={this.activeChangeHandler}
+          onActiveChangeHandler={this.activeIdChangeHandler}
         />
       </ThemeContext.Provider>
     );

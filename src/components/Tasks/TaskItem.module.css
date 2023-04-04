@@ -32,7 +32,29 @@
   color: inherit;
 }
 
+.active {
+  border-radius: 12px;
+  background-color: yellow;
+  width: 0.5rem;
+  height: 4.5rem;
+}
 
+.finished {
+  border-radius: 12px;
+  background-color: green;
+  width: 0.5rem;
+  height: 4.5rem;
+}
 
+.archives {
+  border-radius: 12px;
+  background-color: gray;
+  width: 0.5rem;
+  height: 4.5rem;
+}
+
+.scratch {
+  text-decoration: line-through;
+}
 
 

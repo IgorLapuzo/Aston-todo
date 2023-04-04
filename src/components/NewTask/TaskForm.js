@@ -69,6 +69,7 @@ class TaskForm extends Component {
 						<div className={classes.control}>
 							<label>Заголовок*</label>
 							<input 
+								required
 								type='text'
 								ref= {this.titleInputRef}
 							/>
@@ -81,8 +82,9 @@ class TaskForm extends Component {
 							/>
 						</div>
 						<div className={classes.control}>
-							<label>Дата</label>
+							<label>Дата*</label>
 							<input 
+								required
 								type='date' 
 								min='2019-01-01' 
 								max='2025-12-31'

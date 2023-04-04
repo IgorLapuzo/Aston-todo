@@ -37,9 +37,14 @@
 }
 
 .content {
-  padding: 1rem;
 	background-color: var(--main-bg-color);
   color: inherit;
+}
+
+.status {
+  background-color: var(--main-bg-color);
+  color: inherit;
+  font-size: 0.8rem;
 }
 
 .actions {
@@ -49,6 +54,26 @@
   justify-content: flex-end;
   gap: 0.5rem;
 	background-color: var(--main-bg-color);
+}
+
+input {
+  font: inherit;
+  color: inherit;
+  font-size: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 10rem;
+  max-width: 100%;
+  background-color: var(--input-bg-color);
+}
+
+.helper {
+  background-color: var(--main-bg-color);
+  color: inherit;
+  font-size: 0.8rem;
+  margin: 0;
+  padding-left: 1rem;
 }
 
 @media (min-width: 768px) {

@@ -14,7 +14,6 @@ const TasksFilter = (props) => {
           <option value='all'>Все</option>
           <option value='active'>Активные</option>
           <option value='finished'>Выполненные</option>
-					<option value='unfinished'>Неполненные</option>
           <option value='archives'>В архиве</option>
         </select>
       </div>

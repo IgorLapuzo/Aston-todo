@@ -16,6 +16,7 @@ const TasksList = (props) => {
         title={task.title}
         description={task.description}
         date={task.date}
+				status={task.status}
 				id={task.id}
       	/>
 			))}
