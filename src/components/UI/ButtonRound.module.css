@@ -6,7 +6,6 @@
   cursor: pointer;
 	border-radius: 12px;
 	transition: background-color 200ms ease-in-out;
-  
 }
 
 .button:hover,

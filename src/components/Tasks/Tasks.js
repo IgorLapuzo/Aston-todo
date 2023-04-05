@@ -3,7 +3,6 @@ import TasksFilter from './TasksFilter';
 import TasksList from './TasksList';
 import classes from './Tasks.module.css';
 
-
 class Tasks extends Component {
   constructor() {
     super();
@@ -26,12 +25,19 @@ class Tasks extends Component {
           />
           <TasksList 
             onActiveChangeHandler={this.props.onActiveChangeHandler}
-            items={this.props.items.filter((task) => {
-              if (this.state.filteredGroup === 'all') {
-                return true
-              };
-              return task.status === this.state.filteredGroup;
-            })} />
+            items={
+              this.props.items
+                .filter((task) => 
+                  {
+                    if (this.state.filteredGroup === 'all') {
+                      return true
+                    };
+                  return task.status === this.state.filteredGroup;
+                  }
+                )
+                .filter((task) => task.title.includes(this.props.searchTerm))
+            } 
+          />
         </div>
       </Fragment> 
     )

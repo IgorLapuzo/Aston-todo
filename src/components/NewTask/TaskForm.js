@@ -3,7 +3,6 @@ import ErrorModal from '../UI/ErrorModal';
 import Button from '../UI/Button';
 import classes from './TaskForm.module.css';
 
-
 class TaskForm extends Component {
 	constructor(props) {
 		super(props) 
@@ -15,7 +14,6 @@ class TaskForm extends Component {
       errorTitle: '',
       errorMessage: '',
     }
-		
 	}
 	
 	submitHandler = (event) => {

@@ -11,6 +11,7 @@ class App extends Component {
     this.state={
       tasks: [],
       theme: 'light',
+      searchTerm: '',
       activeId: '',
       activeTitle: '',
       activeDescription: '',
@@ -19,6 +20,10 @@ class App extends Component {
       editTitleMode: false,
       editDescriptionMode: false,
     }
+  }
+
+  searchChangeHandler = (event) => {
+    this.setState({searchTerm: event.target.value})
   }
 
   changeThemeHandler = () => {
@@ -167,9 +172,14 @@ class App extends Component {
           onDescriptionChange={this.onDescriptionChange}
           deleteActiveTask={this.deleteActiveTask}
         />)}
-        <Header />
-        <NewTask onAddTask={this.addTaskHandler.bind(this)}/>
+        <Header
+          searchChangeHandler={this.searchChangeHandler.bind(this)}
+        />
+        <NewTask 
+          onAddTask={this.addTaskHandler.bind(this)}
+        />
         <Tasks 
+          searchTerm={this.state.searchTerm}
           items={this.state.tasks}
           onActiveChangeHandler={this.activeIdChangeHandler}
         />

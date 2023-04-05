@@ -17,7 +17,7 @@ const TaskItem = props => {
 	}
 	
 	return (
-	<Fragment>
+		<Fragment>
 			<div className={classes['task-item']} onClick={onPassId}>
 			<div>{checkStatus(props.status)}</div>
 				<div className={classes.container}>
@@ -29,7 +29,7 @@ const TaskItem = props => {
 				</div>
 				<Date date={props.date}/>
 			</div>
-	</Fragment>
+		</Fragment>
 	)
 }
 

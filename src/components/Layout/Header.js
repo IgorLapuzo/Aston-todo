@@ -5,7 +5,6 @@ import dark from '../../assets/dark.png';
 import classes from './Header.module.css';
 import { ThemeContext } from '../../context/ThemeContext';
 
-
 class Header extends Component {
 
 	static contextType = ThemeContext;
@@ -22,6 +21,7 @@ class Header extends Component {
 							<input 
 								placeholder='Поиск...'
 								type='text'
+								onChange={this.props.searchChangeHandler}
 							/>
 						</div>
 					<ButtonRound className={classes.button} onClick={this.onClickHandler}>
@@ -34,7 +34,6 @@ class Header extends Component {
 			</Fragment>
 		)
 	}
-	
 }
 
 export default Header;
