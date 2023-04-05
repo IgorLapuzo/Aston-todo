@@ -39,3 +39,10 @@
   max-width: 100%;
   background-color: var(--input-bg-color);
 }
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: center;
+  }
+  
+}

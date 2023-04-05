@@ -22,7 +22,12 @@ const ModalView = (props) => {
 					<h3 onClick = {props.activateTitleEditMode}>{props.title}</h3>
 				}	
 				{props.editTitleMode &&
-					<input autoFocus = {true} onChange = {props.onTitleChange} onBlur = {props.deactivateEditMode} value = {props.title} />
+					<input 
+						autoFocus = {true} 
+						onChange = {props.onTitleChange} 
+						onBlur = {props.deactivateEditMode} 
+						value = {props.title} 
+					/>
 				}
         </header>
 				<div className={classes.container}>
@@ -33,7 +38,12 @@ const ModalView = (props) => {
 									<p onClick = {props.activateDescriptionEditMode}>{props.description}</p>
 								}	
 								{props.editDescriptionMode &&
-									<input autoFocus = {true} onChange = {props.onDescriptionChange} onBlur = {props.deactivateEditMode} value = {props.description} />
+									<input 
+										autoFocus = {true} 
+										onChange = {props.onDescriptionChange} 
+										onBlur = {props.deactivateEditMode} 
+										value = {props.description} 
+									/>
 								}
 							</div>
 						}

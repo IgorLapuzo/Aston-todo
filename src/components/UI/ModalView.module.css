@@ -84,6 +84,10 @@ input {
 }
 
 @media (max-width: 768px) {
+  .modal {
+    position: relative;
+    top: 20vh;
+  }
   .actions {
     flex-direction: column;
   }
