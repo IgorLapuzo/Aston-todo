@@ -5,42 +5,11 @@ import NewTask from './components/NewTask/NewTask';
 import ModalView from './components/UI/ModalView';
 import { ThemeContext } from './context/ThemeContext'
 
-const DUMMY_TASKS = [
-  {
-    id: 1,
-    title: 'Title1',
-    description: 'Description1',
-    date: new Date(2021, 2, 30, 3, 0),
-    status: 'active'
-  },
-  {
-    id: 2,
-    title: 'Title2',
-    description: 'Description2',
-    date: new Date(2021, 2, 30, 4, 0),
-    status: 'finished'
-  },
-  {
-    id: 3,
-    title: 'Title3',
-    description: 'Description3',
-    date: new Date(2021, 2, 30, 5, 0),
-    status: 'active'
-  },
-  {
-    id: 4,
-    title: 'Title4',
-    description: 'Description4',
-    date: new Date(2021, 2, 30, 6, 0),
-    status: 'archives'
-  },  
-]
-
 class App extends Component {
   constructor() {
     super();
     this.state={
-      tasks: DUMMY_TASKS,
+      tasks: [],
       theme: 'light',
       activeId: '',
       activeTitle: '',
@@ -49,7 +18,6 @@ class App extends Component {
       activeStatus: '',
       editTitleMode: false,
       editDescriptionMode: false,
-      editDateMode: false,
     }
   }
 
@@ -63,9 +31,25 @@ class App extends Component {
     this.setState({tasks: [...this.state.tasks, task]})
   };
 
+  componentDidMount() {
+    const getItems = JSON.parse(localStorage.getItem('tasks'), function(key, value) {
+      if (typeof value === 'string' && /^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.\d\d\dZ$/.test(value)) {
+        return new Date(value)
+      }
+      return value
+    }) || []
+    const localTheme = localStorage.getItem('theme') || 'light'
+    this.setState({
+      tasks: getItems,
+      theme: localTheme,
+    })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps === this.props && prevState === this.state) return;
     document.body.dataset.theme = this.state.theme;
+    localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+    localStorage.setItem('theme', this.state.theme)
   }
 
   activeIdChangeHandler = (id) => {
@@ -90,6 +74,7 @@ class App extends Component {
         description: this.state.activeDescription,
         date: this.state.activeDate,
         status: this.state.activeStatus}],
+        
       activeId: '',
       activeTitle: '',
       activeDescription: '',
@@ -97,7 +82,6 @@ class App extends Component {
       activeStatus: '',
 		})
   }
-
 
   deleteActiveTask = () => {
     this.setState({

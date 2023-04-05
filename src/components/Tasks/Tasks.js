@@ -8,7 +8,7 @@ class Tasks extends Component {
   constructor() {
     super();
     this.state={
-      filteredGroup: 'active',
+      filteredGroup: 'all',
     }
   }
 
